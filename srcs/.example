@@ -1,0 +1,16 @@
+[MariaDB]
+SQL_DB=
+SQL_USER=
+SQL_PASS=
+ROOTPASS=
+
+[Wordpress]
+WP_ADM_URL=
+WP_ADM_USER=
+WP_ADM_PASS=
+WP_ADM_MAIL=
+
+[User]
+WP_USER=
+WP_PASS=
+WP_MAIL=
