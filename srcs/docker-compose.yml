@@ -1,0 +1,51 @@
+
+x-common-conf: &config
+  env_file: ".env"
+  restart: on-failure
+
+services:
+  nginx:
+    <<: *config
+    container_name: nginx
+    build: ./requirements/nginx
+    ports:
+      - "443:443"
+    volumes:
+      - wordpress:/var/www/html
+
+  mariadb:
+    <<: *config
+    container_name: mariadb
+    build: ./requirements/mariadb
+    expose:
+      - "3306"
+    volumes:
+      - mariadb:/var/lib/mysql
+
+  wordpress:
+    <<: *config
+    container_name: wordpress
+    build: ./requirements/wordpress
+    expose:
+      - "9000"
+    volumes:
+      - wordpress:/var/www/html
+
+networks:
+  inception:
+    driver: bridge
+
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: /home/mnascime/data/wordpress
+
+  mariadb:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: /home/mnascime/data/mariadb
